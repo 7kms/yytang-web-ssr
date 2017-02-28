@@ -56,7 +56,7 @@
         <div :class="$style.nav">
             <div class="text-center" :class="$style.navTab">
                 <a :class="{ [$style.btn]:true, [$style.on]:isLogin() }" href="javascript:;" @click="goLogin">登录</a>
-        
+                <y-icon name="dot" color="#999"></y-icon>
                 <a :class="{ [$style.btn]:true, [$style.on]:!isLogin() }" href="javascript:;" @click="goRegister">注册</a>
             </div>
            
@@ -71,7 +71,7 @@
     export default {
         methods:{
             isLogin(){
-                return this.$router.currentRoute.path == '/login';
+                return this.$router.currentRoute.path == '/entrance/login';
             },
             goLogin(){
                 this.$router.replace('login');

@@ -18,7 +18,7 @@ module.exports = {
             'vue': path.join(nodeModulePath, 'vue/dist/vue.common.js'),
             'vuex': path.join(nodeModulePath, 'vuex'),
             'vue-router': path.join(nodeModulePath, 'vue-router/dist/vue-router.js'),
-            'api': path.resolve(__dirname, '../src/api')
+            // 'api': path.resolve(__dirname, '../src/api')
         }
     },
     module:{
