@@ -1,0 +1,71 @@
+@import './const.less';
+html,body,.y-content{
+    height: 100%;
+    font-size: 62.5%;
+}
+body{
+        background-color: @body-color;
+        font-size: @font-14;
+        font-family: -apple-system,PingFang SC,Hiragino Sans GB,Arial,Microsoft YaHei,Helvetica Neue,sans-serif;
+        color: @font-color-6;
+        word-wrap: break-word;
+        -webkit-font-smoothing: antialiased;
+}
+*{
+    box-sizing: border-box;
+}
+ul,li{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+    &:link,&:visited{
+        color: inherit;
+    }
+}
+::-moz-selection {
+  color: @theme-color; background: @highlight;
+}
+
+::selection {
+ color: @theme-color; background: @highlight;
+} 
+input{
+    outline: none;
+    border: none;
+}
+.text-center{
+    text-align: center;
+}
+.text-right{
+    text-align: right;
+}
+.text-left{
+    text-align: left;
+}
+.pull-left{
+    float: left;
+}
+.pull-right{
+    float: right;
+}
+.inline-block{
+    display: inline-block;
+    vertical-align: middle;
+}
+.one-line{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.clearfix{
+    &::after{
+        content: '';
+        display: block;
+        height: 0;
+        clear: both;
+    }
+    
+}

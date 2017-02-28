@@ -1,0 +1,4 @@
+{
+  "presets": ["latest", "stage-2","flow-vue"],
+  "plugins": ["transform-runtime"]
+}

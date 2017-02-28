@@ -1,0 +1,109 @@
+@import './icon-font.less';
+@import './common.less';
+@import './components.less';
+@import './animate.less';
+
+.link,.hover{
+    cursor: pointer;
+    &:hover{
+        color: @hint-color;
+    }
+}
+.highlight{
+    color: @hint-color;
+}
+.container {
+    margin: 0 auto;
+}
+.y-tooltip {
+    @space: 6px;
+    @borderW: 4px;
+    display: none;
+    position: absolute;
+    line-height: normal;
+    min-width: 40px;
+    min-height: 20px;
+    line-height: 20px;
+    font-size: 10px;
+    text-align: center;
+    border-radius: 4px;
+    background-color: @theme-color;
+    color: #fff;
+    &.show{
+        display: block;
+    }
+    &::after{
+        content: '';
+        position: absolute;
+        border-width: @borderW;
+        border-style: solid;
+        border-color: transparent;
+    }
+    .h-center(){
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .v-center(){
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &.top{
+        margin-bottom: @space;
+        bottom: 100%;
+        &.center {
+           .h-center(); 
+        }
+        &::after{
+            top: 100%;
+            left: 50%;
+            margin-left: -@borderW;
+            border-bottom-color: @theme-color;
+        }
+    }
+    &.bottom{
+        top: 100%;
+        margin-top: @space;
+        transition: .3s;
+        &.center {
+           .h-center();
+        }
+        &::after{
+            bottom: 100%;
+            left: 50%;
+            margin-left: -@borderW;
+            border-bottom-color: @theme-color;
+        }
+    }
+    &.left{
+        right: 100%;
+        margin-right: @space;
+         &.center {
+           .v-center();
+        }
+        &::after{
+            left: 100%;
+            top: 50%;
+            margin-top: -@borderW;
+            border-left-color: @theme-color;
+        }
+    }
+    &.right{
+        margin-left: @space;
+        left: 100%;
+         &.center {
+           .v-center();
+        }
+        &::after{
+            right: 100%;
+            top: 50%;
+            margin-top: -@borderW;
+            border-right-color: @theme-color;
+        }
+    }
+}
+.article-list-content{
+    width: 65%;
+    min-width: 600px;
+    margin-left: 150px;
+    margin-top: 75px;
+}

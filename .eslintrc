@@ -1,0 +1,32 @@
+{
+  "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+  "env": {
+      "browser": true
+  },
+  "root": true,
+  "parser": "babel-eslint",
+  "extends": "vue",
+  "plugins": ["html","flow-vars"],
+  "rules": {
+    "flow-vars/define-flow-type": 1,
+    "flow-vars/use-flow-type": 1,
+    "indent": 0,
+    "spaced-comment": 0,
+    "no-trailing-spaces": 0,
+    "no-use-before-define": 2,
+    "no-unused-vars": 2,
+    "no-restricted-globals": 2,
+    "no-undef": 2,
+    "no-global-assign": 2,
+    "no-empty": 1,
+    "semi": 0,
+    "no-extra-semi": 2,
+    "eqeqeq": 0
+  }
+}
