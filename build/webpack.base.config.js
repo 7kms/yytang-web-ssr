@@ -1,6 +1,8 @@
 const path = require('path')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const vueConfig = require('./vue-loader.config')
 const nodeModulePath = path.join(__dirname, '../node_modules')
+
 module.exports = {
     devtool: 'inline-source-map',
     entry:{
@@ -18,7 +20,7 @@ module.exports = {
             'vue': path.join(nodeModulePath, 'vue/dist/vue.common.js'),
             'vuex': path.join(nodeModulePath, 'vuex'),
             'vue-router': path.join(nodeModulePath, 'vue-router/dist/vue-router.js'),
-            // 'api': path.resolve(__dirname, '../src/api')
+            'api': path.resolve(__dirname, '../src/api')
         }
     },
     module:{
@@ -31,8 +33,7 @@ module.exports = {
                         loader:'vue-loader',
                          options: vueConfig
                     }
-                ],
-               
+                ]
             },
             {
                 test: /\.js$/,
@@ -45,27 +46,35 @@ module.exports = {
             },
              {
                test: /\.less$/,
-               use: [
-                    'style-loader',
-                    { 
-                        loader: 'css-loader',
-                        options: { 
-                            modules: true,
-                            localIdentName: '[path][name]__[local]--[hash:base64:5]'
-                        }
-                    },
-                    'less-loader'
-                ]
+               use: ExtractTextPlugin.extract({
+                        fallback: "style-loader",
+                        use:  ['css-loader','less-loader']
+                   })
             },
             {
-                test: /\.(png|jpg|gif|svg)$/,
+               test: /\.css$/,
+               use: ExtractTextPlugin.extract({
+                        fallback: "style-loader",
+                        use: "css-loader"
+                    })
+            },
+            //  {
+            //    test: /\.less$/,
+            //    use:  ['style-loader','css-loader','less-loader']
+            // },
+            // {
+            //    test: /\.css$/,
+            //    use:  ['style-loader','css-loader']
+            // },
+            {
+                test: /\.(png|jpg|gif|svg|ico)$/,
                  use: [
                     {
                         loader:'url-loader',
-                       options: {
-                            limit: 10000,
-                            name: '[name].[ext]?[hash]'
-                                }
+                        options: {
+                            limit: 500,
+                            name: 'img/[name].[hash:6].[ext]'
+                        }
                     }
                 ]
             },
@@ -76,20 +85,13 @@ module.exports = {
                     options: {
                         name: 'font/[name].[hash:6].[ext]'
                     }
-                }],
-                
-            },
-             {
-                test: /.(ico)$/,
-                 use: [{
-                    loader:'file-loader',
-                    options: {
-                        name: 'img/[name].[hash:6].[ext]'
-                    }
                 }]
             }
         ]
     },
+    plugins:[
+        new ExtractTextPlugin({ filename:'css/[name].[chunkHash:6].css', allChunks: true })
+    ],
     //当资源超过limit的提醒方式,单个资源的默认大小是250kb
     //https://github.com/webpack/webpack/issues/3216
     //https://webpack.js.org/configuration/performance/#components/sidebar/sidebar.jsx

@@ -1,16 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// import pageTest from '../pages/index.vue'
-import entrance from '../pages/entrance/index.vue'
+import mainWrap from '../pages/main/index.vue'
+import mainContent from '../pages/main/content.vue'
+// import testContent from '../pages/test/index.vue'
+
 Vue.use(VueRouter)
 const ROUTER_SETTING = {
 	mode: 'history', // default value 'hash'
     base: '/',
+    component: mainWrap,
 	routes: [
-        {
+         {
             path: '/',
-            component: entrance
+            component: mainContent
         }
     ]
 };
