@@ -1,4 +1,4 @@
-// import * as types from './mutation-types'
+import * as types from './mutation-types'
 import $api from 'api'
 const state = {
     posterUrl: ''
@@ -6,7 +6,7 @@ const state = {
 const getters = {
     posterUrl: state => state.posterUrl
 }
-var  getParams = () => {
+var getParams = () => {
     var paramObj = {
         include: 'user',
         limit: 10,
@@ -18,21 +18,22 @@ var  getParams = () => {
     return paramObj;
 }
 const actions = {
-    getInitList ({ commit, state, dispatch }) {
+    [types.GET_INITIAL_LIST] ({ commit, state, dispatch }) {
         return new Promise((resolve, reject) => {
-             $api.post('/public/discover', getParams())
+            console.log(getParams())
+             $api.get('/public/discover', getParams())
             .then(data => {
-                commit('setInitInfo', data)
+                commit([types.GET_INITIAL_LIST], data)
                 resolve(data);
             }, data => {
-                commit('setInitInfo', data);
+                commit([types.GET_INITIAL_LIST], data);
                 reject(data);
             })
         })
     }
 }
 const mutations = {
-    setInitInfo (state, data) {
+    [types.GET_INITIAL_LIST] (state, data) {
             state.initList = data
     }
 }
