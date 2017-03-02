@@ -145,9 +145,6 @@
         created(){
             console.log('index----created')
             // this.getUserInfo();
-        },
-        preFetch(store){
-            store.dispatch('public/GET_INITIAL_LIST')
         }
     }
 </script>

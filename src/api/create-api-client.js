@@ -10,10 +10,10 @@ var configHttpOptions = () => {
 }
 var baseConfig = {
     credentials: true,
-    timeout: 15000
-    // headers: {
-    //     'Content-Type': 'application/json'
-    // }
+    timeout: 15000,
+    headers: {
+        'Content-Type': 'application/json'
+    }
 }
 configHttpOptions();
 export default {

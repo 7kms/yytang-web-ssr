@@ -11,6 +11,7 @@
 <script>
     import List from './list.vue';
     import $api from 'api';
+    import {mapState} from 'vuex';
     export default {
         components:{
             List
@@ -18,8 +19,8 @@
         data(){
             return {
                 noMore: false,
-                loading: true,
-                dataList: [],
+                loading: false,
+                // dataList: [],
                 limit: 15,
                 page: 0
             }
@@ -48,7 +49,12 @@
             },
             isDisabled(){
                 return this.loading || this.noMore;
-            }
+            },
+            ...mapState({
+                dataList:(state)=>{
+                    return state.publicInfo.initList
+                }
+            })
         },
         methods:{
             getParams() {
@@ -75,7 +81,8 @@
                     }
                 }).then(dataInfo=>{
                     this.page++;
-                    this.dataList = [...this.dataList,...dataInfo.results];
+                    this.$store.dispatch('public/SET_INITIAL_LIST',dataInfo.results)
+                    // this.dataList = [...this.dataList,...dataInfo.results];
                     if(dataInfo.results.length < this.limit){
                         this.noMore = true;
                     }
@@ -103,15 +110,30 @@
         watch:{
             '$route' (to, from) {
                 let {category='recommend'} = to.params;
-                this.refresh(category);
+                // this.refresh(category);
             }
         },
-        preFetch(){
-            this.$store.dispatch('getInitList')
+        preFetch(store){
+            return store.dispatch('public/GET_INITIAL_LIST')
         },
+        //  preFetch(store){
+        //      console.log(this)
+        //     return $api.get('/public/discover',this.getParams()).then(dataInfo=>{
+        //             this.page++;
+        //             // this.$store.dispatch('public/SET_INITIAL_LIST',dataInfo.results)
+        //             this.dataList = [...this.dataList,...dataInfo.results];
+        //             if(dataInfo.results.length < this.limit){
+        //                 this.noMore = true;
+        //             }
+        //         },(err)=>{
+        //             console.log(err);
+        //         }).then(()=>{
+        //             this.loading = false;
+        //         });
+        // },
         created(){
             let {category='recommend'} = this.$route.params;
-            this.refresh(category);
+            // this.refresh(category);
         }
     }
 </script>

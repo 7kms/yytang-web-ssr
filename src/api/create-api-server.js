@@ -2,7 +2,7 @@ import request from 'request';
 import * as config from '../config';
 var querystring = require('querystring');
 var baseOptions = {
-    credentials: true,
+    // credentials: true,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -20,15 +20,16 @@ function sendData (opt) {
     return promise;
 }
 function basePath (path) {
-    return config.serverUrl + '/' + path;
+    return config.serverUrl + path;
 }
 function get (url, dataObj, opt = {}) {
     url = basePath(url) + '?' + querystring.stringify(dataObj)
+    console.log(url)
     var options = Object.assign({}, baseOptions, { method: 'GET', url }, opt);
     var promise = new Promise((resolve, reject) => {
         var sendPromise = sendData(options);
-        sendPromise.then(data => {
-            resolve(data);
+        sendPromise.then(res => {
+            resolve(res.data);
         }, error => {
             reject(error);
         })
