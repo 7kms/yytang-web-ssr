@@ -103,37 +103,19 @@
                 this.search();
             },
             click(dataObj) {
-                // console.log(dataObj.url)
                 window.open(dataObj.url,'_blank');
             },
         },
         watch:{
             '$route' (to, from) {
                 let {category='recommend'} = to.params;
-                // this.refresh(category);
             }
         },
         preFetch(store){
             return store.dispatch('public/GET_INITIAL_LIST')
         },
-        //  preFetch(store){
-        //      console.log(this)
-        //     return $api.get('/public/discover',this.getParams()).then(dataInfo=>{
-        //             this.page++;
-        //             // this.$store.dispatch('public/SET_INITIAL_LIST',dataInfo.results)
-        //             this.dataList = [...this.dataList,...dataInfo.results];
-        //             if(dataInfo.results.length < this.limit){
-        //                 this.noMore = true;
-        //             }
-        //         },(err)=>{
-        //             console.log(err);
-        //         }).then(()=>{
-        //             this.loading = false;
-        //         });
-        // },
         created(){
             let {category='recommend'} = this.$route.params;
-            // this.refresh(category);
         }
     }
 </script>

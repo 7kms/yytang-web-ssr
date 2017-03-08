@@ -1,5 +1,6 @@
 import 'babel-polyfill';
-// import 'normalize.css'
+import 'normalize.css'
+// require('!css-loader!normalize.css')
 import './assets/less/basic.less'
 import Vue from 'vue'
 import router from './router/index.js'

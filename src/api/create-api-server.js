@@ -24,7 +24,6 @@ function basePath (path) {
 }
 function get (url, dataObj, opt = {}) {
     url = basePath(url) + '?' + querystring.stringify(dataObj)
-    console.log(url)
     var options = Object.assign({}, baseOptions, { method: 'GET', url }, opt);
     var promise = new Promise((resolve, reject) => {
         var sendPromise = sendData(options);

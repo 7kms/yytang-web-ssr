@@ -6,7 +6,7 @@ module.exports = {
     })
   ],
   cssModules: {
-    localIdentName: '[path][name]---[local]---[hash:base64:5]',
+    localIdentName: '[name]-[hash:base64:5]',
     camelCase: true
   }
 }

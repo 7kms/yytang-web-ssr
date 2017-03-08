@@ -123,14 +123,14 @@
                 window.open(dataObj.url,'_blank');
             }
         },
-        // beforeRouteEnter (to, from, next) {
-        //     next(vm => {
-        //         console.log('index beforerouteenter')
-        //         if(vm.isLogin){
-        //            vm.$router.push('/timeline')
-        //         }
-        //     })
-        // },
+        beforeRouteEnter (to, from, next) {
+            next(vm => {
+                console.log('index beforerouteenter')
+                if(vm.isLogin){
+                   vm.$router.push('/timeline')
+                }
+            })
+        },
         computed:{
             ...mapGetters({
                 userInfo: 'user/GET_USERINFO',
@@ -144,7 +144,7 @@
         },
         created(){
             console.log('index----created')
-            // this.getUserInfo();
+            this.getUserInfo();
         }
     }
 </script>
