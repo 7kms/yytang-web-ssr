@@ -99,7 +99,7 @@
                 this.page = 0;
                 this.noMore = false;
                 this.category = category == 'recommend' ? 'frontend' : category;
-                this.dataList = [];
+                this.$store.dispatch('public/RESET_LIST');
                 this.search();
             },
             click(dataObj) {
@@ -109,10 +109,13 @@
         watch:{
             '$route' (to, from) {
                 let {category='recommend'} = to.params;
+                this.refresh(category);
             }
         },
         preFetch(store){
-            return store.dispatch('public/GET_INITIAL_LIST')
+            // console.log(store.state)
+            let {category='recommend'} = store.state.route.params;
+            return store.dispatch('public/GET_INITIAL_LIST',category)
         },
         created(){
             let {category='recommend'} = this.$route.params;

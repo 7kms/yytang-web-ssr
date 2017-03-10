@@ -84,6 +84,7 @@
                 if(!objectId){
                     this.$store.dispatch('user/GET_USERINFO')
                     .then(resData => {
+                        console.log(resData)
                         if (resData.objectId) {
                             this.getSubscribeInfo();
                         } else {

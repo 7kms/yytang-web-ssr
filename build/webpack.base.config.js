@@ -21,7 +21,7 @@ module.exports = {
             'vuex': path.join(nodeModulePath, 'vuex'),
             'vue-router': path.join(nodeModulePath, 'vue-router/dist/vue-router.js'),
             'api': path.resolve(__dirname, '../src/api'),
-            'normalize.css':path.join(nodeModulePath, 'normalize.css/normalize.css'),
+            // 'normalize.css':path.join(nodeModulePath, 'normalize.css/normalize.css'),
         }
     },
     module:{
@@ -48,15 +48,16 @@ module.exports = {
              {
                test: /\.less$/,
                use: ExtractTextPlugin.extract({
-                        fallback: "style-loader",
+                        fallback: "vue-style-loader",
                         use:  ['css-loader','less-loader']
                    })
             },
+ 
             {
                test: /\.css$/,
                use: ExtractTextPlugin.extract({
-                        fallback: "style-loader",
-                        use: "css-loader"
+                        fallback: "vue-style-loader",
+                        use: ['css-loader']
                     })
             },
             //  {

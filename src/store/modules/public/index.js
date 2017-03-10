@@ -7,14 +7,14 @@ const state = {
 const getters = {
     posterUrl: state => state.posterUrl
 }
-var getParams = () => {
+var getParams = (category) => {
     var paramObj = {
         include: 'user',
         limit: 10,
         skip: 0,
         order:'-hotIndex'
     };
-    var whereObj = {"category":'frontend',"createdAt":{"$gte":{"__type":"Date","iso":new Date( Date.now() - 86400*7*1000 ).toISOString()}}};
+    var whereObj = { "category": category, "createdAt":{"$gte":{"__type":"Date","iso":new Date( Date.now() - 86400*7*1000 ).toISOString()}}};
     paramObj.where = JSON.stringify(whereObj);
     return paramObj;
 }
@@ -22,9 +22,9 @@ const actions = {
     [types.SET_INITIAL_LIST] ({ commit }, list) {
         commit(types.SET_INITIAL_LIST, list)
     },
-    [types.GET_INITIAL_LIST] ({ commit, state, dispatch }) {
+    [types.GET_INITIAL_LIST] ({ commit, state, dispatch }, category) {
         return new Promise((resolve, reject) => {
-            $api.get('/public/discover', getParams())
+            $api.get('/public/discover', getParams(category))
             .then(data => {
                 commit(types.SET_INITIAL_LIST, data.results)
                 resolve(data);
@@ -33,14 +33,19 @@ const actions = {
                 reject(error);
             })
         });
+    },
+     [types.RESET_LIST] ({ commit }) {
+        commit(types.RESET_LIST)
     }
 }
 const mutations = {
     [types.SET_INITIAL_LIST] (state, list) {
        state.initList = [...state.initList, ...list]
+    },
+     [types.RESET_LIST] (state) {
+        state.initList = [];
     }
-}
-
+};
 export default {
     state,
     getters,
